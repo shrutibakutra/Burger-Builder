@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import Aux from '../../hoc/Aux'
 import Burger from '../../component/Burger/Burger'
-
+import Modal from '../../component/Modal/Modal'
+import OrderSummery from '../../component/OrderSummery/OrderSummery'
 
 let INGREDIENT_PRICE = {
     salad: 0.3,
@@ -16,8 +17,10 @@ const BurgerBuilder = (props) => {
     const [disableLess, setDisableLess] = useState(true)
     const [totalPrice, setTotalPrice] = useState(3)
     const [purchasable, setPurchasable] = useState(false)
+    const [showModal, setashowModal] = useState(false)
+    const node = useRef();
 
-
+    //add more ingredients to burger
     const handleClickMore = (igKey) => {
 
         //add ingredient
@@ -26,7 +29,12 @@ const BurgerBuilder = (props) => {
         let updatedIngreds = { ...ingredient }
         updatedIngreds[igKey] = newCount
         setIngredient(updatedIngreds)
-        setDisableLess(false)
+
+        //anable less button
+        if(updatedIngreds[igKey] > 0){
+            setDisableLess(false)
+
+        }
 
         //set plus price 
         let oldPrice = INGREDIENT_PRICE[igKey]
@@ -37,6 +45,7 @@ const BurgerBuilder = (props) => {
 
     }
 
+    //reduce ingredients from burger
     const handleClickLess = (igKey) => {
         //set less ingredients
         let oldCount = ingredient[igKey]
@@ -50,9 +59,14 @@ const BurgerBuilder = (props) => {
         let newPrice = totalPrice - oldPrice
         setTotalPrice(newPrice)
 
+        //disable less button
+        if(updatedIngreds[igKey]==0){
+            setDisableLess(true)
+        }
         handlePurchasable(igKey,updatedIngreds)
     }
 
+    //activate/deactivate ordernow button
     const handlePurchasable = (igKey,updatedIngreds) => {
         
         if (updatedIngreds[igKey] > 0) {
@@ -60,13 +74,35 @@ const BurgerBuilder = (props) => {
         }
     }
 
-    const check = () => {
-        console.log(purchasable)
+    const handleModal = () => {
+        setashowModal(true)
+    }
+
+    //close modal
+    useEffect(() => {
+        document.addEventListener('mousedown',handleClickOutSide);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutSide);
+          };
+    },[])
+    const handleClickOutSide=(e)=>{
+        if (node.current.contains(e.target)) {
+            return;
+          }
+        setashowModal(false)
     }
 
 
     return (
-        <Aux>
+        <Aux >
+            <div ref={node}>
+            {showModal ? <Modal  show={showModal}>
+                <OrderSummery ingredients={ingredient} show={showModal}/>
+            </Modal>
+            :''}
+            </div>
+
             <Burger ingredient={ingredient} />
             <div style={styles.priceBox}>Price: <strong>{totalPrice.toFixed(2)}</strong></div>
             <div style={styles.mainWrap}>
@@ -78,7 +114,7 @@ const BurgerBuilder = (props) => {
                                 <div style={styles.igkey}>{igKey}</div>
                                 <div style={styles.button}>
                                     <button onClick={() => handleClickMore(igKey)}> More </button>
-                                    <button onClick={() => handleClickLess(igKey)} disabled={disableLess}>Less</button>
+                                    <button key={igKey} onClick={() => handleClickLess(igKey)} disabled={disableLess}>Less</button>
                                 </div>
                             </div>
                         )
@@ -87,13 +123,14 @@ const BurgerBuilder = (props) => {
                 </div>
 
             </div>
+           
             <button style={{
                 height: '10%',
                 width: '10%',
                 backgroundColor: purchasable ? 'green' : '#17afb',
                 margin: '5% 10% 5% 45%',
                 color: 'black'
-            }} diabled={!purchasable} onClick={() => check()}> ORDER NOW </button>
+            }} diabled={!purchasable} onClick={() => handleModal()}> ORDER NOW </button>
 
         </Aux>
     )
