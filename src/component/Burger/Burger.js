@@ -33,12 +33,12 @@ export default Burger;
 const styles = {
     burger: {
         width: '100%',
-        margin: 'auto',
+        // margin: 'auto',
         height: 250,
         overFlow: 'scroll',
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 12,
-        marginBottom:'20%'
+        marginBottom:'10%'
     }
 }

@@ -10,7 +10,7 @@ const Layout = (props) => (
 
 const styles = {
     main:{
-        marginTop:16
+        marginTop:'10%'
     }
 }
 

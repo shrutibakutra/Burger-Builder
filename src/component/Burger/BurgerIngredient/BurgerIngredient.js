@@ -59,7 +59,7 @@ const styles = {
         borderRadius: '15px',
     },
     salad: {
-        width: '35%',
+        width: '30%',
         height: '10%',
         margin: 'auto',
         background: 'linear-gradient(#228c1d, #91ce50)',
