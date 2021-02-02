@@ -98,7 +98,7 @@ const BurgerBuilder = (props) => {
         <Aux >
             <div ref={node}>
             {showModal ? <Modal  show={showModal}>
-                <OrderSummery ingredients={ingredient} show={showModal}/>
+                <OrderSummery ingredients={ingredient} totalPrice={totalPrice}/>
             </Modal>
             :''}
             </div>
