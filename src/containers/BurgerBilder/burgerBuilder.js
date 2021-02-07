@@ -14,10 +14,10 @@ let INGREDIENT_PRICE = {
 const BurgerBuilder = (props) => {
 
     const [ingredient, setIngredient] = useState({ salad: 0, bacon: 0, meat: 0, cheese: 0 })
-    const [disableLess, setDisableLess] = useState(true)
+    const [disableLess, setDisableLess] = useState({ salad: true, bacon: true, meat: true, cheese: true })
     const [totalPrice, setTotalPrice] = useState(3)
     const [purchasable, setPurchasable] = useState(false)
-    const [showModal, setashowModal] = useState(false)
+    const [showModal, setshowModal] = useState(false)
     const node = useRef();
 
     //add more ingredients to burger
@@ -30,10 +30,15 @@ const BurgerBuilder = (props) => {
         updatedIngreds[igKey] = newCount
         setIngredient(updatedIngreds)
 
-        //anable less button
-        if(updatedIngreds[igKey] > 0){
-            setDisableLess(false)
 
+        //manage less button
+        let disButtons = {...disableLess}
+        if(updatedIngreds[igKey]<=0){
+            disButtons[igKey]=true
+            setDisableLess(disButtons)
+        }else{
+            disButtons[igKey] = false
+            setDisableLess(disButtons)
         }
 
         //set plus price 
@@ -59,10 +64,16 @@ const BurgerBuilder = (props) => {
         let newPrice = totalPrice - oldPrice
         setTotalPrice(newPrice)
 
-        //disable less button
-        if(updatedIngreds[igKey]==0){
-            setDisableLess(true)
+        //manage less button
+        let disButtons = {...disableLess}
+        if(updatedIngreds[igKey]<=0){
+            disButtons[igKey]=true
+            setDisableLess(disButtons)
+        }else{
+            disButtons[igKey] = false
+            setDisableLess(disButtons)
         }
+
         handlePurchasable(igKey,updatedIngreds)
     }
 
@@ -75,13 +86,16 @@ const BurgerBuilder = (props) => {
     }
 
     const handleModal = () => {
-        setashowModal(true)
+        if(totalPrice > 3){
+            setshowModal(true)
+        }else{
+            alert('Please add one or more ingredient to make it tasty :)')
+        }
     }
 
     //close modal
     useEffect(() => {
         document.addEventListener('mousedown',handleClickOutSide);
-
         return () => {
             document.removeEventListener("mousedown", handleClickOutSide);
           };
@@ -90,9 +104,8 @@ const BurgerBuilder = (props) => {
         if (node.current.contains(e.target)) {
             return;
           }
-        setashowModal(false)
+        setshowModal(false)
     }
-
 
     return (
         <Aux >
@@ -114,7 +127,7 @@ const BurgerBuilder = (props) => {
                                 <div style={styles.igkey}>{igKey}</div>
                                 <div style={styles.button}>
                                     <button onClick={() => handleClickMore(igKey)}> More </button>
-                                    <button key={igKey} onClick={() => handleClickLess(igKey)} disabled={disableLess}>Less</button>
+                                    <button key={igKey} onClick={() => handleClickLess(igKey)} disabled={disableLess[igKey]}>Less</button>
                                 </div>
                             </div>
                         )
@@ -125,10 +138,12 @@ const BurgerBuilder = (props) => {
             </div>
            
             <button style={{
-                height: '10%',
+                height: '5%',
                 width: '10%',
+                borderRadius:5,
+                position:'absolute',
                 backgroundColor: purchasable ? 'green' : '#17afb',
-                margin: '5% 10% 5% 45%',
+                margin: '1% 10% 5% 45%',
                 color: 'black'
             }} diabled={!purchasable} onClick={() => handleModal()}> ORDER NOW </button>
 
@@ -143,14 +158,15 @@ const styles = {
         width: '60%',
         backgroundColor: 'orange',
         marginLeft: '20%',
-        // boxShadow: '5px 10px brown',
     },
     priceBox: {
         backgroundColor: '#17afbf',
-        // height:'15%',
         width: '10%',
+        height:'10%',
         marginLeft: '45%',
-        textAlign: 'center'
+        textAlign: 'center',
+        borderRadius:3,
+        position:'relative'
     },
     igkey: {
         fontWeight: 'bold'

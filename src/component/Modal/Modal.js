@@ -1,14 +1,14 @@
 import React  from 'react';
 
 
-const Modal = (props) => {
+const Modal = React.memo((props) => {
     return (
         <div style={styles.Modal}>   
             {props.children}
         </div>
     )
 }
-
+)
 export default Modal;
 
 const styles = {
@@ -23,8 +23,8 @@ const styles = {
         left: '15%',
         top: '30%',
         height:'40%',
-        marginLeft:'20%'
-    
+        marginLeft:'20%',
+        transition: 'width 10s'
     }
 }
 

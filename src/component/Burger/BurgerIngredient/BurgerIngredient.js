@@ -6,10 +6,24 @@ const BurgerIngredient = (props) => {
 
     switch (props.type) {
         case ('breadBottom'):
-            ingredient = <div style={styles.breadBottom}></div>;
+            ingredient = <div style={styles.breadBottom}>
+            </div>;
             break;
         case ('breadTop'):
-            ingredient = <div style={styles.breadTop}></div>;
+            ingredient = <div style={styles.breadTop}>
+                <div style={styles.seeds}></div>
+                <div style={styles.seed1}></div>
+                <div style={styles.seed2}></div>
+                <div style={styles.seed3}></div>
+                <div style={styles.seed4}></div>
+                <div style={styles.seed5}></div>
+                <div style={styles.seed6}></div>
+
+
+
+
+
+            </div>;
             break;
         case ('meat'):
             ingredient = <div style={styles.meat}></div>;
@@ -30,7 +44,7 @@ const BurgerIngredient = (props) => {
     return ingredient;
 }
 
-BurgerIngredient.PropTypes ={
+BurgerIngredient.prototype ={
     type : PropTypes.string.isRequired
 }
 
@@ -39,17 +53,19 @@ const styles = {
         height: '15%',
         width: '30%',
         background: 'linearGradient(#F08E4A, #e27b36)',
-        borderRadius: '70% 70% 20% 20%',
-        boxShadow: 'inset 0px -30px #c15711',
+        borderRadius: '0 0 30px 30px',
+        boxShadow: 'inset 0 -38px #e27b36',
         margin: '1% auto'
     },
     breadTop: {
-        height: '30%',
+        height: '50%',
         width: '30%',
         background: 'linear-gradient(#bc581e, #e27b36)',
         borderRadius: '50% 50% 0 0',
         margin: '1% auto',
-        position: 'relative'
+        position: 'relative',
+        boxShadow: 'inset -15px 0 #c15711'
+
     },
     meat: {
         width: '30%',
@@ -77,6 +93,89 @@ const styles = {
         height: '4%',
         background: 'linear-gradient(#bf3813, #c45e38)',
         margin: '1% auto',
+    },
+    seeds:{
+        width: '3%',
+        height: '5%',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '30%',
+        top: '30%',
+        borderRadius: '40%',
+        transform: 'rotate(-20deg)',
+        boxShadow: 'inset -2px -3px #c9c9c9'
+    },
+    seed1:{
+        content: "",
+        width: '2%',
+        height: '5%',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '10%',
+        top: '30%',
+        borderRadius: '40%',
+        transform: 'rotate(60deg)',
+        boxShadow: 'inset -1px 2px #c9c9c9',
+    },
+    seed2:{
+        content: "",
+        width: '2%',
+        height: '5%',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '50%',
+        top: '30%',
+        borderRadius: '40%',
+        transform: 'rotate(30deg)',
+        boxShadow: 'inset -1px 2px #c9c9c9',
+    },
+    seed3:{
+        content: "",
+        width: '2%',
+        height: '5%',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '70%',
+        top: '30%',
+        borderRadius: '40%',
+        transform: 'rotate(120deg)',
+        boxShadow: 'inset -1px 2px #c9c9c9',
+    },
+    seed4:{
+        content: "",
+        width: '2%',
+        height: '5%',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '90%',
+        top: '30%',
+        borderRadius: '40%',
+        transform: 'rotate(20deg)',
+        boxShadow: 'inset -1px 2px #c9c9c9',
+    },
+    seed5:{
+        content: "",
+        width: '2%',
+        height: '5%',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '70%',
+        top: '30%',
+        borderRadius: '40%',
+        transform: 'rotate(20deg)',
+        boxShadow: 'inset -1px 2px #c9c9c9',
+    },
+    seed6:{
+        content: "",
+        width: '2%',
+        height: '5%',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '80%',
+        top: '30%',
+        borderRadius: '40%',
+        transform: 'rotate(20deg)',
+        boxShadow: 'inset -1px 2px #c9c9c9',
     }
 
 }

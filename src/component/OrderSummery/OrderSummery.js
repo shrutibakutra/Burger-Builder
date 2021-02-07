@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import Aux from '../../hoc/Aux'
+import { Link } from 'react-router-dom';
 
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const OrderSummery = (props) => {
-
+const OrderSummery = React.memo((props) => {
 
     const ingredientSummery = Object.keys(props.ingredients)
         .map(igKey => {
             return (
                 <li key={igKey}>
-                    <span style={{ textTransform: 'capitalize' }}> {igKey}: {props.ingredients[igKey]}</span>
+                    <span style={{ textTransform: 'capitalize' }}>
+                        {igKey}: {props.ingredients[igKey]}
+                    </span>
                 </li>
             )
         })
-
-    const handleCheckOut = () => {
-        alert('price:' + props.totalPrice)
-    }
-
-    
-
 
     return (
         <Aux>
@@ -30,18 +24,14 @@ const OrderSummery = (props) => {
                 {ingredientSummery}
             </ul>
             <p>Continue to checkout?</p>
-            <button style={{ color: 'green' }} onClick={() => handleCheckOut()}><strong>COUNTINUE</strong></button>
+            <Link to={{ pathname: '/payment', state: { price: props.totalPrice } }} >
+                <button style={{ color: 'green' }} ><strong>COUNTINUE</strong></button>
+            </Link>
 
-            {/* <form onSubmit={handleSubmit}>
-                <CardElement />
-
-                <button style={{ color: 'green' }} type="submit" disabled={!stripe} onClick={() => handleCheckOut()}><strong>COUNTINUE</strong></button>
-
-            </form> */}
 
         </Aux>
     )
-}
+})
 
 export default OrderSummery;
 
