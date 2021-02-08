@@ -32,7 +32,7 @@ const styles = {
     },
     navbar: {
         width: '100%',
-        height: '50px',
+        height: '60px',
         backgroundColor: 'brown'
     },
     navs: {

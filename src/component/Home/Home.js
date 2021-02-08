@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import image4 from '../../Images/Burgers/burger4.jpg'
 import image2 from '../../Images/Burgers/burger2.jpg'
 import image3 from '../../Images/Burgers/burger3.jpg'
+import self from '../../Images/Burgers/self.png'
+
 import { Link, withRouter } from 'react-router-dom';
 import Aux from '../../hoc/Aux';
 
@@ -36,13 +38,14 @@ const Home = (props) => {
                 </div>
                 <div style={{ width: '100%', height: '500px', backgroundColor: 'black' }}>
 
-                    <div style={{ display: 'flex', paddingTop: '7%' }}>
-                        <Carousel style={{ height: '30%', width: '30%', marginLeft: '5%' }}>
-                            <Carousel.Item   >
+                    <div style={{ display: 'flex', paddingTop: '7%' ,marginLeft:'15%'}}>
+                        <Carousel style={{ height: '40%', width: '40%', marginLeft: '5%' }}>
+                            <Carousel.Item >
                                 <img
                                     className="d-block w-100"
                                     src={image4}
                                     alt="First slide"
+                                   
                                 />
                                 <Carousel.Caption >
                                     <h2>Shruti Special Burger</h2>
@@ -54,6 +57,7 @@ const Home = (props) => {
                                     className="d-block w-100"
                                     src={image2}
                                     alt="Third slide"
+                                    
 
                                 />
                                 <Carousel.Caption>
@@ -66,6 +70,7 @@ const Home = (props) => {
                                     className="d-block w-100"
                                     src={image3}
                                     alt="Third slide"
+                                    
                                 />
                                 <Carousel.Caption>
                                     <h2>Spicy Bacon Burger</h2>
@@ -73,7 +78,16 @@ const Home = (props) => {
                                 </Carousel.Caption>
                             </Carousel.Item>
                         </Carousel>
+                        <p style={styles.or}> OR </p>
                         <Link to={'/prepareBurger'}>
+                            <img
+                             src={self}
+                             height={'50%'}
+                             width={'60%'}
+                             style={styles.self}
+                             > 
+                             
+                            </img>
                             <button style={styles.button1}>Create Your own Burger</button>
                         </Link>
                     </div>
@@ -87,14 +101,24 @@ export default withRouter(Home);
 
 const styles = {
     button1: {
-        marginLeft: '20%',
-        height: '10%',
-        width: '200%',
+        marginLeft: '25%',
+        height: '30%',
+        width: '25%',
         backgroundColor: 'orange',
         color: 'white',
-        borderRadius: '15',
-        marginTop: '50%'
+        borderRadius: '20px',
+        marginTop: '5%'
     },
     headline: { fontFamily: 'Tahoma, sans-serif', fontWeight: 'bold', textAlign: 'center' },
     main: { width: '80%', height: '80px', paddingBottom: '5%', marginLeft: '5%' },
+    or:{
+        fontSize:50,
+        fontWeight:'bold',
+        fontColor:'#fff',
+        marginTop:'6%',
+        marginLeft:'2%'
+    },
+    self:{
+        marginLeft:'10%'
+    }
 }

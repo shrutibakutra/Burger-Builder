@@ -37,6 +37,6 @@ const styles = {
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 12,
-        marginBottom:'5%'
+        marginBottom:'5%',
     }
 }
