@@ -5,10 +5,11 @@ import image4 from '../../Images/Burgers/burger4.jpg'
 import image2 from '../../Images/Burgers/burger2.jpg'
 import image3 from '../../Images/Burgers/burger3.jpg'
 import self from '../../Images/Burgers/self.png'
+import Footer from '../Footer/Footer'
 
 import { Link, withRouter } from 'react-router-dom';
 import Aux from '../../hoc/Aux';
-
+import Map from '../Map/Map'
 
 
 const PRICE = {
@@ -93,6 +94,7 @@ const Home = (props) => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </Aux>
     )
 }
@@ -104,7 +106,7 @@ const styles = {
         marginLeft: '25%',
         height: '30%',
         width: '25%',
-        backgroundColor: 'orange',
+        backgroundColor: '#bf4300',
         color: 'white',
         borderRadius: '20px',
         marginTop: '5%'

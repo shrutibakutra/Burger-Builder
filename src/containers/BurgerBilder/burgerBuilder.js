@@ -156,8 +156,11 @@ export default BurgerBuilder;
 const styles = {
     mainWrap: {
         width: '60%',
-        backgroundColor: 'orange',
+        backgroundColor: '#bf4300',
         marginLeft: '20%',
+        paddingTop:'2px',
+        marginTop:'5px',
+        paddingBottom:'2px'
     },
     priceBox: {
         backgroundColor: '#17afbf',

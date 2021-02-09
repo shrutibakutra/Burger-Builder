@@ -1,5 +1,8 @@
 import React from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import Map from '../Map/Map'
+import { withRouter } from 'react-router-dom';
+
 
 const CheckoutForm = (props) => {
 
@@ -28,7 +31,10 @@ const CheckoutForm = (props) => {
     if (error) {
       console.log(error);
     } else {
-      alert('payment done successfully')
+      alert('Payment done successfully')
+      props.history.push({
+        pathname:'/'
+      })
     }
   };
 
@@ -40,10 +46,12 @@ const CheckoutForm = (props) => {
                 <button type="submit" disabled={!stripe} style={styles.button}>
                     Pay </button>
             </form>
+            {/* <Map style={styles.map}/> */}
         </div>
+
     )
 }
-export default CheckoutForm;
+export default withRouter(CheckoutForm);
 
 const styles = {
   form:{
@@ -53,9 +61,14 @@ const styles = {
   },
   button:{
     marginTop:50,
-    backgroundColor:'green'
+    backgroundColor:'green',
+    marginBottom:'50%'
+
   },
   card:{
     marginBottom:'50px'
+  },
+  map:{
+    marginTop:'100%'
   }
 }

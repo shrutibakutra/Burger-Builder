@@ -24,7 +24,10 @@ const OrderSummery = React.memo((props) => {
                 {ingredientSummery}
             </ul>
             <p>Continue to checkout?</p>
-            <Link to={{ pathname: '/payment', state: { price: props.totalPrice } }} >
+            {/* <Link to={{ pathname: '/payment', state: { price: props.totalPrice } }} >
+                <button style={{ color: 'green' }} ><strong>COUNTINUE</strong></button>
+            </Link> */}
+             <Link to={{ pathname: '/cart', state: { price: props.totalPrice } }} >
                 <button style={{ color: 'green' }} ><strong>COUNTINUE</strong></button>
             </Link>
 

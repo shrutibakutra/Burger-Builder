@@ -1,5 +1,6 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom'
+import image4 from '../../Images/Burgers/burger4.jpg'
 
 
 const reducer = (initialState, action) => {
@@ -16,6 +17,8 @@ const reducer = (initialState, action) => {
                     ...initialState.burgerData
                     ]
                 };
+            }else{
+                alert("You have to buy atlease one burger! :)")
             };
         case 'increase':
             // console.log(initialState.burgerData[0].quantity, initialState.burgerData[0].grandTotal)
@@ -26,7 +29,7 @@ const reducer = (initialState, action) => {
                         quantity: initialState.burgerData[0].quantity + 1,
                         grandTotal: (initialState.burgerData[0].quantity + 1) * initialState.burgerData[0].basePrice,
                         basePrice: initialState.burgerData[0].basePrice,
-                        disable:false
+                        disable: false
                     },
                     ...initialState.burgerData
                     ]
@@ -37,12 +40,13 @@ const reducer = (initialState, action) => {
 
 const Cart = (props) => {
     let orderDetails = props.location.state
+
     const initialState = {
         burgerData: [{
             quantity: 1,
             grandTotal: orderDetails && orderDetails.price,
             basePrice: orderDetails && orderDetails.price,
-            disable:true
+            disable: true
         }]
     };
 
@@ -57,21 +61,30 @@ const Cart = (props) => {
                     <div style={styles.box} >
                         <div style={styles.insidebox}>
                             <div>
-                                <p style={styles.burgerName}> {orderDetails && orderDetails.name}</p>
+                                <p style={styles.burgerName}> {orderDetails.name ? orderDetails.name : 'Your Favourite Burger'}</p>
                                 <img
+                                src={image4}
+                                height={'80%'}
+                                width={'70%'}
+                                style={styles.image}
                                 ></img>
                             </div>
                             <div style={styles.rightSide}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <p style={styles.burgerName}>Quantity: {state.burgerData[0].quantity}</p>
                                     <div style={styles.button}>
-                                        <button style={{ borderRadius: 3 }} onClick={() => dispatch({ type: 'increase' })}>+</button>
-                                        <button style={{ borderRadius: 3 }}  disabled={state.burgerData[0].disable} onClick={() => dispatch({ type: 'decrease' })}>-</button>
+                                        <button style={{ borderRadius: 3 }}
+                                             onClick={() => dispatch({ type: 'increase' })} >
+                                            + </button>
+                                        <button style={{ borderRadius: 3 }}
+                                            disabled={state.burgerData[0].disable}
+                                          onClick={() => dispatch({ type: 'decrease' })} >
+                                            - </button>
 
                                     </div>
                                 </div>
                                 <p style={styles.burgerName}>Price: ${orderDetails && orderDetails.price}</p>
-                                <p style={styles.burgerName}>Total: ${state.burgerData[0].grandTotal}</p>
+                                <p style={styles.burgerName}>Total: ${(state.burgerData[0].grandTotal)}</p>
                             </div>
                         </div>
                     </div>
@@ -113,14 +126,15 @@ const styles = {
         color: 'green',
         fontWeight: 600,
         marginLeft: '20px',
-        marginTop: '20px'
+        marginTop: '10px'
     },
     button: {
         display: 'flex',
-        marginLeft: '20px',
+        marginLeft: '50px',
         height: '25px',
-        marginTop: '10%',
-        borderRadius: '25%'
+        marginTop: '5%',
+        borderRadius: '25%',
+        paddingTop:'-0.5px'
     },
     checkout: {
         backgroundColor: 'green',
@@ -144,5 +158,8 @@ const styles = {
         height: '100px',
         color: 'orange',
         fontSize: 25
+    },
+    image:{
+        marginLeft:'5%'
     }
 }
