@@ -27,7 +27,7 @@ const reducer = (initialState, action) => {
                     ...initialState.burgerData[0],
                     burgerData: [{
                         quantity: initialState.burgerData[0].quantity + 1,
-                        grandTotal: (initialState.burgerData[0].quantity + 1) * initialState.burgerData[0].basePrice,
+                        grandTotal: ((initialState.burgerData[0].quantity + 1) * initialState.burgerData[0].basePrice).toFixed(2),
                         basePrice: initialState.burgerData[0].basePrice,
                         disable: false
                     },

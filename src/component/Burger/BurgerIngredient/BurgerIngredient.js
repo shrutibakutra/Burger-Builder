@@ -50,15 +50,16 @@ BurgerIngredient.prototype ={
 
 const styles = {
     breadBottom: {
-        height: '15%',
+        height: '10%',
         width: '30%',
         background: 'linearGradient(#F08E4A, #e27b36)',
         borderRadius: '0 0 30px 30px',
         boxShadow: 'inset 0 -38px #e27b36',
-        margin: '1% auto'
+        margin: '1% auto',
+        
     },
     breadTop: {
-        height: '50%',
+        height: '40%',
         width: '30%',
         background: 'linear-gradient(#bc581e, #e27b36)',
         borderRadius: '50% 50% 0 0',
