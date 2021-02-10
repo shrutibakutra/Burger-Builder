@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import image4 from '../../Images/Burgers/burger4.jpg'
 import image2 from '../../Images/Burgers/burger2.jpg'
@@ -20,13 +19,25 @@ const PRICE = {
 }
 const Home = (props) => {
 
-    const addToCart = (e,key) => {
+    const [hover, setHover] = useState(false)
+
+    const addToCart = (e, key) => {
         props.history.push({
             pathname: '/cart',
-            state: { name : e.target.name, price: PRICE[key]}
-          })
+            state: { name: e.target.name, price: PRICE[key] }
+        })
 
     }
+
+    const hanleMouseOver = () => {
+        setHover(true)
+    }
+
+    const handleMouseOut = () => {
+        setHover(false)
+
+    }
+
 
     return (
         <Aux>
@@ -35,66 +46,76 @@ const Home = (props) => {
                     <p style={styles.headline}>
                         Why does cooking take like 6 hours and eating like 3 seconds and washing dishes like 7 days and 7 nights.
                      </p>
-                    <p style={styles.headline}>Just order a burger</p>
+                    <p style={styles.headline}>Just order a burger??</p>
                 </div>
-                <div style={{ width: '100%', height: '500px', backgroundColor: 'black' }}>
+                <div style={{ width: '100%', height: '400px', backgroundColor: 'black' }}>
 
-                    <div style={{ display: 'flex', paddingTop: '7%' ,marginLeft:'15%'}}>
-                        <Carousel style={{ height: '40%', width: '40%', marginLeft: '5%' }}>
-                            <Carousel.Item >
+                        <div style={{marginLeft:'20%'  }}>
                                 <img
-                                    className="d-block w-100"
-                                    src={image4}
-                                    alt="First slide"
-                                   
-                                />
-                                <Carousel.Caption >
-                                    <h2>Shruti Special Burger</h2>
-                                    <button name="Shruti Special Burger" key='shrutiSpecial' onClick={(e,key='shrutiSpecial') => addToCart(e,key='shrutiSpecial')}>Add to cart</button>
-                                </Carousel.Caption>
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img
-                                    className="d-block w-100"
-                                    src={image2}
-                                    alt="Third slide"
-                                    
+                                    src={self}
+                                    height={'30%'}
+                                    width={'30%'}
+                                    style={styles.self}
+                                >
+                                </img>
 
-                                />
-                                <Carousel.Caption>
-                                    <h2>Cheese Burger</h2>
-                                    <button name="Cheese Burger" onClick={(e,key) => addToCart(e,key='chesseBurger')}>Add to cart</button>
-                                </Carousel.Caption>
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img
-                                    className="d-block w-100"
-                                    src={image3}
-                                    alt="Third slide"
-                                    
-                                />
-                                <Carousel.Caption>
-                                    <h2>Spicy Bacon Burger</h2>
-                                    <button name="Spicy Bacon Burger" onClick={(e,key) => addToCart(e,key='spicyBaconBurger')}>Add to cart</button>
-                                </Carousel.Caption>
-                            </Carousel.Item>
-                        </Carousel>
-                        <p style={styles.or}> OR </p>
+                        </div>
                         <Link to={'/prepareBurger'}>
-                            <img
-                             src={self}
-                             height={'50%'}
-                             width={'60%'}
-                             style={styles.self}
-                             > 
-                             
-                            </img>
-                            <button style={styles.button1}>Create Your own Burger</button>
+
+                        <button style={styles.button1}>Create Your own Burger</button>
                         </Link>
+
+                    </div>
+
+
+                    <div style={{ justifyContent: 'space-between', display: 'flex', margin: 'auto', }}>
+
+                    <div style={ hover ? styles.images : styles.image}>
+                        <img
+                            className="d-block w-100"
+                            src={image4}
+                            alt="First slide"
+                            height={'40%'}
+                            width={'10%'}
+
+                        />
+                        <p style={styles.names}>Shruti Special Burger</p>
+                        <button style={styles.button} name="Shruti Special Burger" key='shrutiSpecial' onClick={(e, key = 'shrutiSpecial') => addToCart(e, key = 'shrutiSpecial')}>Add to cart</button>
+                    </div>
+
+
+                    <div style={ hover ? styles.images : styles.image}
+                        onMouseEnter={() => hanleMouseOver()}
+                        onMouseLeave={() => handleMouseOut()}>
+
+                        <img
+                            className="d-block w-100"
+                            src={image2}
+                            alt="First slide"
+                            height={'40%'}
+                            width={'10%'}
+
+                        />
+                        <p style={styles.names}>Cheese Burger</p>
+                        <button style={styles.button} name="Cheese Burger" onClick={(e, key) => addToCart(e, key = 'chesseBurger')}>Add to cart</button>
+
+
+                    </div>
+                    <div style={ hover ? styles.images : styles.image}>
+                        <img
+                            className="d-block w-100"
+                            src={image3}
+                            alt="First slide"
+                            height={'40%'}
+                            width={'10%'}
+
+                        />
+                        <p style={styles.names}>Spicy Bacon Burger</p>
+                        <button style={styles.button} name="Spicy Bacon Burger" onClick={(e, key) => addToCart(e, key = 'spicyBaconBurger')}>Add to cart</button>
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </Aux>
     )
 }
@@ -103,24 +124,48 @@ export default withRouter(Home);
 
 const styles = {
     button1: {
-        marginLeft: '25%',
-        height: '30%',
-        width: '25%',
+        marginLeft: '41%',
         backgroundColor: '#bf4300',
         color: 'white',
-        borderRadius: '20px',
-        marginTop: '5%'
+        borderRadius: '5px',
+        borderColor:'orange'
+       
     },
-    headline: { fontFamily: 'Tahoma, sans-serif', fontWeight: 'bold', textAlign: 'center' },
+    headline: { fontFamily: 'Tahoma, sans-serif', fontWeight: 'bold', textAlign: 'center',color:'grey' },
     main: { width: '80%', height: '80px', paddingBottom: '5%', marginLeft: '5%' },
-    or:{
-        fontSize:50,
-        fontWeight:'bold',
-        fontColor:'#fff',
-        marginTop:'6%',
-        marginLeft:'2%'
+  
+    self: {
+        marginLeft: '20%',
+        marginTop:'10%',
+
     },
-    self:{
-        marginLeft:'10%'
+    images: {
+        height: '10%',
+        width: '20%',
+        margin: '5% auto',
+        boxShadow:'10px 5px 5px black' 
+    //    ' -ms-transform': 'scale(1.5)', /* IE 9 */
+    //     '-webkit-transform': 'scale(1.5)', /* Safari 3-8 */
+    //     transform: 'scale(1.5)', 
+    },
+    image:{
+        height: '10%',
+        width: '20%',
+        margin: '5% auto',
+
+    },
+    names: {
+        fontSize: '15px',
+        textAlign: 'center',
+        color: 'orange'
+    },
+    button: {
+        backgroundColor: 'grey',
+        borderRadius: '5px',
+        borderColor: 'grey',
+        marginLeft: '30%'
     }
+
+
+
 }
