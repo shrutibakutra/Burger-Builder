@@ -8,8 +8,6 @@ import Footer from '../Footer/Footer'
 
 import { Link, withRouter } from 'react-router-dom';
 import Aux from '../../hoc/Aux';
-import Map from '../Map/Map'
-
 
 const PRICE = {
     shrutiSpecial: '5',
@@ -18,8 +16,7 @@ const PRICE = {
 
 }
 const Home = (props) => {
-
-    const [hover, setHover] = useState(false)
+    const [hover, setHover] = useState({shrutiSpecial:false,chesseBurger:false,spicyBaconBurger:false})
 
     const addToCart = (e, key) => {
         props.history.push({
@@ -29,8 +26,8 @@ const Home = (props) => {
 
     }
 
-    const hanleMouseOver = () => {
-        setHover(true)
+    const hanleMouseOver = (burgerKey) => {    
+        setHover({...hover,[burgerKey]:true})
     }
 
     const handleMouseOut = () => {
@@ -48,8 +45,8 @@ const Home = (props) => {
                      </p>
                     <p style={styles.headline}>Just order a burger??</p>
                 </div>
-                <div style={{ width: '100%', height: '400px', backgroundColor: 'black' }}>
 
+                <div style={{ width: '100%', height: '400px', backgroundColor: 'black' }}>
                         <div style={{marginLeft:'20%'  }}>
                                 <img
                                     src={self}
@@ -61,16 +58,15 @@ const Home = (props) => {
 
                         </div>
                         <Link to={'/prepareBurger'}>
-
                         <button style={styles.button1}>Create Your own Burger</button>
                         </Link>
-
                     </div>
 
 
                     <div style={{ justifyContent: 'space-between', display: 'flex', margin: 'auto', }}>
-
-                    <div style={ hover ? styles.images : styles.image}>
+                    <div style={ hover.shrutiSpecial ? styles.images : styles.image}
+                     onMouseEnter={(key) => hanleMouseOver(key='shrutiSpecial')}
+                     onMouseLeave={(key) => handleMouseOut(key='shrutiSpecial')}>
                         <img
                             className="d-block w-100"
                             src={image4}
@@ -84,9 +80,9 @@ const Home = (props) => {
                     </div>
 
 
-                    <div style={ hover ? styles.images : styles.image}
-                        onMouseEnter={() => hanleMouseOver()}
-                        onMouseLeave={() => handleMouseOut()}>
+                    <div style={ hover.chesseBurger ? styles.images : styles.image}
+                        onMouseEnter={(key) => hanleMouseOver(key='chesseBurger')}
+                        onMouseLeave={(key) => handleMouseOut(key='chesseBurger')}>
 
                         <img
                             className="d-block w-100"
@@ -101,7 +97,9 @@ const Home = (props) => {
 
 
                     </div>
-                    <div style={ hover ? styles.images : styles.image}>
+                    <div style={ hover.spicyBaconBurger ? styles.images : styles.image}
+                         onMouseEnter={(key) => hanleMouseOver(key='spicyBaconBurger')}
+                         onMouseLeave={(key) => handleMouseOut(key='spicyBaconBurger')}>
                         <img
                             className="d-block w-100"
                             src={image3}
